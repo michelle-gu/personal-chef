@@ -48,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
     public class DrawerClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //TODO Do Fun things with Fragments
+            if (position == 0) {
+                setContentView(R.layout.refrigerator_view);
+            }
             Toast.makeText(getApplicationContext(), views.get(position), Toast.LENGTH_LONG).show();
             drawerLayout.closeDrawer(listView);
         }
