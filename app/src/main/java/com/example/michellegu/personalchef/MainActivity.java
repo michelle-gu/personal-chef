@@ -1,5 +1,7 @@
 package com.example.michellegu.personalchef;
 
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,14 +17,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
-    private DrawerLayout drawerLayout;
+    PagerAdapter mDemoCollectionPagerAdapter;
+    ViewPager mViewPager;
     private FrameLayout frameLayout;
     private ListView listView;
     private ArrayList<String> views;
     private ArrayAdapter<String> adapter;
-    private DrawerClickListener listener;
 
 
     @Override
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
         listView = (ListView) findViewById(R.id.drawer_list_view);
 
@@ -40,20 +41,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.drawer_list_item, R.id.list_item_text, views);
         listView.setAdapter(adapter);
 
-        listener = new DrawerClickListener();
-        listView.setOnItemClickListener(listener);
-
-    }
-
-    public class DrawerClickListener implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (position == 0) {
-                setContentView(R.layout.refrigerator_view);
-            }
-            Toast.makeText(getApplicationContext(), views.get(position), Toast.LENGTH_LONG).show();
-            drawerLayout.closeDrawer(listView);
-        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
