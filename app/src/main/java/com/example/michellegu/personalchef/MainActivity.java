@@ -1,6 +1,7 @@
 package com.example.michellegu.personalchef;
 
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +20,8 @@ import java.util.Arrays;
 
 public class MainActivity extends FragmentActivity {
 
-    PagerAdapter mDemoCollectionPagerAdapter;
+    CollectionPagerAdapter mPagerAdapter;
     ViewPager mViewPager;
-    private FrameLayout frameLayout;
-    private ListView listView;
-    private ArrayList<String> views;
-    private ArrayAdapter<String> adapter;
 
 
     @Override
@@ -32,14 +29,14 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
-        listView = (ListView) findViewById(R.id.drawer_list_view);
+        // ViewPager and its adapters use support library
+        // fragments, so use getSupportFragmentManager.
 
-        String[] temp = getResources().getStringArray(R.array.views_array);
-        views = new ArrayList<>(Arrays.asList(temp));
-
-        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.drawer_list_item, R.id.list_item_text, views);
-        listView.setAdapter(adapter);
+        mPagerAdapter =
+                new CollectionPagerAdapter(
+                        getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mPagerAdapter);
 
     }
 
